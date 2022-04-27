@@ -1,0 +1,28 @@
+.year-month {
+    height: fit-content;
+    display: inline-block;
+}
+table {
+    text-align: center;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    align-self: center;
+    
+}
+table th, td {
+    width: 100px;
+    height: 35px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: dimgrey;
+}
+table td {
+    color: gray;
+}
+.sundays {
+    background-color: pink;
+}
+.saturdays {
+    background-color: paleturquoise;
+}
