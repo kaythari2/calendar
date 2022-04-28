@@ -1,6 +1,19 @@
+.caption {
+    text-align: center;
+}
 .year-month {
     height: fit-content;
     display: inline-block;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.prev-btn {
+    border: 0px;
+    background-color: transparent;
+}
+.next-btn {
+    border: 0px;
+    background-color: transparent;
 }
 table {
     text-align: center;
@@ -8,7 +21,6 @@ table {
     border-collapse: collapse;
     background: white;
     align-self: center;
-    
 }
 table th, td {
     width: 100px;
