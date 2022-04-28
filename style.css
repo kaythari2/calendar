@@ -1,6 +1,10 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
 }
+a {
+    text-decoration: none;
+    color: grey;
+}
 .caption {
     text-align: center;
 }
@@ -10,20 +14,15 @@ body {
     padding-left: 10%;
     padding-right: 10%;
 }
-.prev-btn {
-    border: 0px;
-    background-color: transparent;
-}
-.next-btn {
-    border: 0px;
-    background-color: transparent;
-}
 table {
     text-align: center;
-    margin: 0 auto;
+    margin: 5% auto;
     border-collapse: collapse;
     background: white;
     align-self: center;
+}
+table caption {
+    margin: 3% auto;
 }
 table th, td {
     width: 100px;

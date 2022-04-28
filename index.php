@@ -11,13 +11,19 @@
 </head>
 
 <body class="container">
+	<?php
+	include 'calendar.php';
+	$calendar = new Calendar();
+ 
+	echo $calendar->show();
+	?>
 	
-	<table>
+	<!-- <table>
 		<caption>
             <div class="caption">
-                <input type="button" class="prev-btn" value="<"> 
+                <a class="prev-btn" href=""><</a> 
                 <h3 class="year-month">January 2021</h3>
-                <input type="button" class="next-btn" value=">"> 
+                <a class="next-btn" href="">></a> 
             </div>
         </caption>
 
@@ -89,7 +95,8 @@
 				<td class="saturdays">6</td>
 			</tr>
 		</tbody>
-	</table>
+	</table> -->
+
 </body>
 
 </html>

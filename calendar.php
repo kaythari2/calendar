@@ -1,6 +1,6 @@
 <?php
 class Calendar {
-    private $dayLabels = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+    private $dayLabels = array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
 
     private $currentYear = 0;
     private $currentMonth = 0;
@@ -8,6 +8,13 @@ class Calendar {
     private $currentDate = null;
     private $daysInMont = 0;
     private $naviHref = null;
+
+    /**
+     * Constructor
+     */
+    // public function __construct(){     
+    //     $this->naviHref = htmlentities($_SERVER['PHP_SELF']);
+    // }
 
     public function show() {
         $year = null;
@@ -48,7 +55,7 @@ class Calendar {
                                      
             $content.='<tr>';
             //Create days in a week
-            for($j=1;$j<=7;$j++){
+            for($j=0;$j<7;$j++){
                 $content.=$this->_showDay($i*7+$j);
             }
             $content.='</tr>';
@@ -74,8 +81,13 @@ class Calendar {
             $cellContent=null;
         }
 
-        return '<td id="td-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
-                ($cellContent==null?'mask':'').'">'.$cellContent.'</td>';
+        $classMei = ($cellNumber%7==6?'saturdays':($cellNumber%7==0?'sundays':' '));
+        // printf($cellNumber.' cellnumber >>> '.$cellContent.' ---->'.$classMei.'<br>');
+
+        // return '<td id="td-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
+        //         ($cellContent==null?'mask':'').'">'.$cellContent.'</td>';
+
+        return '<td id="td-'.$this->currentDate.'" class='.$classMei.'>'.$cellContent.'</td>';
     }
 
     private function _createCaption() {
@@ -83,14 +95,14 @@ class Calendar {
 
         $nextYear = $this->currentMonth==12?intval($this->currentYear)+1:$this->currentYear;
 
-        $preMonth = $this->currentMont==1?12:intval($this->currentMonth)-1;
+        $preMonth = $this->currentMonth==1?12:intval($this->currentMonth)-1;
 
         $preYear = $this->currentMonth==1?intval($this->currentYear)-1:$this->currentYear;
 
         return 
         '<div class="caption">'.
                 '<a class="prev-btn" href="'.$this->naviHref.'?month='.sprintf('%02d',$preMonth).'&year='.$preYear.'"><</a>'.
-                    '<span class="year-month">'.date('Y M',strtotime($this->currentYear.'-'.$this->currentMonth.'-1')).'</span>'.
+                    '<span class="year-month">'.date('Y - M',strtotime($this->currentYear.'-'.$this->currentMonth.'-1')).'</span>'.
                 '<a class="next-btn" href="'.$this->naviHref.'?month='.sprintf("%02d", $nextMonth).'&year='.$nextYear.'">></a>'.
             '</div>';
     }
@@ -98,7 +110,9 @@ class Calendar {
     private function _createLabels() {
         $content='';
         foreach($this->dayLabels as $index=>$label) {
-            $content.='<th class="'.($label==6?'end title':'start title').' title">'.$label.'</th>'; //気になる labelのよりindexかも。。
+            $classMei = ($index%7==6?'saturdays':($index%7==0?'sundays':' '));
+            // $content.='<th class="'.($label==6?'end title':'start title').' title">'.$label.'</th>'; //気になる labelのよりindexかも。。
+            $content.='<th class="'.$classMei.' title">'.$label.'</th>'; 
         }
 
         return $content;
