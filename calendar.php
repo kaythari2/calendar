@@ -9,13 +9,6 @@ class Calendar {
     private $daysInMont = 0;
     private $naviHref = null;
 
-    /**
-     * Constructor
-     */
-    // public function __construct(){     
-    //     $this->naviHref = htmlentities($_SERVER['PHP_SELF']);
-    // }
-
     public function show() {
         $year = null;
         $month = null;
