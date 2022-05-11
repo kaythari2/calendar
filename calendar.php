@@ -30,7 +30,6 @@ class Calendar {
         $this->currentMonth=$month;
          
         $this->daysInMonth=$this->_daysInMonth($month,$year);  
-         //display return content here...
 
          $content = '<table>'.
                     '<caption>'.
@@ -43,11 +42,9 @@ class Calendar {
                     '</thead>';
         $content.='<tbody>';
         $weeksInMonth = $this->_weeksInMonth($month,$year);
-        // Create weeks in a month
         for( $i=0; $i<$weeksInMonth; $i++ ){
                                      
             $content.='<tr>';
-            //Create days in a week
             for($j=0;$j<7;$j++){
                 $content.=$this->_showDay($i*7+$j);
             }
@@ -58,8 +55,7 @@ class Calendar {
 
     private function _showDay($cellNumber) {
         if ($this->currentDay == 0) {
-            $firstDayOfTheWeek = date('N', strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));
-            
+            $firstDayOfTheWeek = (date('N', strtotime($this->currentYear.'-'.$this->currentMonth.'-01'))) % 7;
             if (intval($cellNumber) == intval($firstDayOfTheWeek)) {
                 $this->currentDay = 1;
             }
@@ -75,8 +71,6 @@ class Calendar {
         }
 
         $classMei = ($cellNumber%7==6?'saturdays':($cellNumber%7==0?'sundays':' '));
-        // printf($cellNumber.' cellnumber >>> '.$cellContent.' ---->'.$classMei.'<br>');
-
         // return '<td id="td-'.$this->currentDate.'" class="'.($cellNumber%7==1?' start ':($cellNumber%7==0?' end ':' ')).
         //         ($cellContent==null?'mask':'').'">'.$cellContent.'</td>';
 
@@ -112,18 +106,19 @@ class Calendar {
     }
 
     private function _weeksInMonth($month=null,$year=null) {
-        if(null==($year)) {
+        if($year==null) {
             $year = date("Y", time());
         }
 
-        if(null==($month)) {
+        if($month==null) {
             $month = date("m", time());
         }
         
         $daysInMonths = $this->_daysInMonth($month,$year);
+
         $numOfWeeks=($daysInMonths%7==0?0:1) + intval($daysInMonths/7);
-        $monthEndingDay = date('N', strtotime($year.'-'.$month.'-'.$daysInMonths)); //ISO-8601形式の曜日。1（月）～7（日）
-        $monthStartDay = date('N', strtotime($year.'-'.$month.'-01'));
+        $monthEndingDay = (date('N', strtotime($year.'-'.$month.'-'.$daysInMonths))) % 7; //ISO-8601形式の曜日。1（月）～7（日）
+        $monthStartDay = (date('N', strtotime($year.'-'.$month.'-01'))) % 7;
 
         if($monthEndingDay<$monthStartDay) {
             $numOfWeeks++;
